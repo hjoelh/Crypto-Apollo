@@ -5,15 +5,14 @@
   font-family: Helvetica, sans-serif;
 }
 
-body {
-  background: transparent;
-}
+
 
 .buttonContainer {
   display: flex;
   justify-content: center;
   margin-top: 100px;
-  background: black;
+  background: transparent;
+  position: relative;
 }
 
 .BuySellBtn {
@@ -104,29 +103,47 @@ body {
 }
 
 .radioDiv input:checked ~ .button1 {
-  background-color: white;
-  color: black;
   .icon {
     transition-duration: 3s;
     transition-property: transform;
     transform: rotateY(360deg);
   }
+
+
 }
 
 .button1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  background: transparent;
+  color: black;
   height: 80px;
   width: 100%;
   font-size: 1.75rem;
   cursor: pointer;
   border: 1px solid black;
   transition: 0.75s;
+  background-color: transparent;
 }
+
 
 .radioDiv {
   width: 100%;
+}
+
+.slider {
+  position: absolute;
+  max-width: 600px;
+  height: 80px;
+  width: 50%;
+  z-index: -1;
+  right: 0px;
+  transition:  0.5s;
+  background: linear-gradient(90deg, #ffffff 0%, #3f5efb 100%);
+}
+
+.button1:checked + .slider  {
+  right: 50%;
+  background: linear-gradient(90deg, #fc466b 0%, #ffffff 100%);
+  transform: translateX(180deg);
 }

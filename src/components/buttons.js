@@ -6,9 +6,12 @@ export default function Button(props) {
     <div className="buttonContainer">
       {/* <button className='button1' type='button'><FaEthereum />eth</button>
       <button className='button1' type='button'><FaBtc />btc</button> */}
+    
 
       <label className="radioDiv">
+    
         <input id="eth" className="button1" type="radio" name="select" checked={props.btnState1} onChange={props.toggle}></input>
+        <div className="slider"></div>
         <span className="button1">
           <FaEthereum className='icon' />
         </span>

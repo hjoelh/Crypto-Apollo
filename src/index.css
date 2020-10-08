@@ -6,10 +6,6 @@
   font-family: Helvetica, sans-serif;
 }
 
-body {
-  background: transparent;
-}
-
 .buttonContainer {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -18,7 +14,8 @@ body {
       -ms-flex-pack: center;
           justify-content: center;
   margin-top: 100px;
-  background: black;
+  background: transparent;
+  position: relative;
 }
 
 .BuySellBtn {
@@ -145,11 +142,6 @@ body {
   width: 0;
 }
 
-.radioDiv input:checked ~ .button1 {
-  background-color: white;
-  color: black;
-}
-
 .radioDiv input:checked ~ .button1 .icon {
   -webkit-transition-duration: 3s;
           transition-duration: 3s;
@@ -171,8 +163,7 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  color: white;
-  background: transparent;
+  color: black;
   height: 80px;
   width: 100%;
   font-size: 1.75rem;
@@ -180,9 +171,31 @@ body {
   border: 1px solid black;
   -webkit-transition: 0.75s;
   transition: 0.75s;
+  background-color: transparent;
 }
 
 .radioDiv {
   width: 100%;
+}
+
+.slider {
+  position: absolute;
+  max-width: 600px;
+  height: 80px;
+  width: 50%;
+  z-index: -1;
+  right: 0px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  background: -webkit-gradient(linear, left top, right top, from(#ffffff), to(#3f5efb));
+  background: linear-gradient(90deg, #ffffff 0%, #3f5efb 100%);
+}
+
+.button1:checked + .slider {
+  right: 50%;
+  background: -webkit-gradient(linear, left top, right top, from(#fc466b), to(#ffffff));
+  background: linear-gradient(90deg, #fc466b 0%, #ffffff 100%);
+  -webkit-transform: translateX(180deg);
+          transform: translateX(180deg);
 }
 /*# sourceMappingURL=index.css.map */
