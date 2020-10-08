@@ -2,5 +2,138 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: Helvetica, sans-serif;
 }
+
+body {
+  background: transparent;
+}
+
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 125px;
+  background: black;
+  overflow: hidden;
+}
+
+.BuySellBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(0, 255, 234) 100%);
+  height: 80px;
+  width: 250px;
+  font-size: 1.75rem;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  border: none;
+  transition: 0.75s;
+  &:hover {
+    color: black;
+  }
+}
+
+
+
+.main {
+  height: 100vh;
+  max-width: 1200px;
+  width: 85%;
+  margin: auto;
+}
+
+.tableContainer {
+  background: linear-gradient(90deg, #FC466B 0%, #3F5EFB 100%);
+}
+
+.tableHeader {
+  display: flex;
+  border: 3px solid black;
+  color: white;
+  justify-content: space-evenly;
+  font-size: 1.5rem;
+  padding: 15px 0;
+  font-weight: 900;
+}
+
+.tableContent {
+  display: flex;
+  align-items: center;
+  color: white;
+  justify-content: space-evenly;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+    img {
+      width: 150px;
+      height: 60px;
+    }
+    p {
+      font-size: 1.75rem;
+      font-weight: bold;
+      
+    }
+    span {
+      font-size: 1rem;
+      letter-spacing: 2px;
+    }
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 10px 0;
+      color: white;
+      background: linear-gradient(90deg, #FC466B 0%, #3F5EFB 100%);
+      height: 50px;
+      width: 300px;
+      font-size: 1.25rem;
+      cursor: pointer;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+      border: none;
+      transition: 0.75s;
+      &:hover {
+        color: black;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      }
+    }
+}
+
+
+
+/* Hide the browser's default checkbox */
+.radioDiv input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.radioDiv input:checked ~ .button1 {
+  background-color:  white;
+  color: black;
+}
+
+.button1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background: transparent;
+  height: 80px;
+  width: 600px;
+  font-size: 1.75rem;
+  cursor: pointer;
+  border: 1px solid black;
+  transition: 0.75s;
+  &:hover .icon {
+    transition-duration: 2s;
+      transition-property: transform;
+      transform: rotateY(360deg);
+  }
+}
+
+
+
 
