@@ -5,38 +5,18 @@ import Table from "./components/table";
 // import { options } from "./particles";
 
 export default function App() {
-  const [prices, setPrices] = React.useState([
-    {
-      exchange: "coinbase",
-      price: "400",
-      image:
-        "https://cryptoradar.co/storage/brokers/VIRZoKjLh1GpTtzktEJ1VnpyEBDYGSWqZLyp1YTf.optimized.png",
-    },
-    {
-      exchange: "gemini",
-      price: "256",
-      image:
-        "https://cryptoradar.co/storage/brokers/October2017/gemini.optimized.png",
-    },
-    {
-      exchange: "gemini",
-      price: "453",
-      image:
-        "https://i.imgur.com/F8iNu5I.png",
-    },
-    {
-      exchange: "gemini",
-      price: "256",
-      image:
-        "https://cryptoradar.co/storage/brokers/teOdi9fCOU4kQCF6ceZUoVbJxjXYwTmzxWApkvOf.optimized.png",
-    }
-  
-]);
+  const [prices, setPrices] = React.useState([]);
+  const [btnState1, setBtnState1] = React.useState(true); //eth
+  const [btnState2, setBtnState2] = React.useState(false); //btc
+  const [loaded, setLoaded] = React.useState(true);
 
-  const coinbase = async () => {
+  const coinbase = async (coin) => {
+    // 'eth' / 'btc
     const img =
       "https://cryptoradar.co/storage/brokers/VIRZoKjLh1GpTtzktEJ1VnpyEBDYGSWqZLyp1YTf.optimized.png";
-    let raw = await fetch(`https://api.coinbase.com/v2/prices/eth-usd/spot`);
+    let raw = await fetch(
+      `https://api.coinbase.com/v2/prices/${coin}-usd/spot`
+    );
     let json = await raw.json();
     let eth = await json.data.amount;
     return {
@@ -46,10 +26,11 @@ export default function App() {
     };
   };
 
-  const coinbasePro = async () => {
-    const img =
-      "https://i.imgur.com/F8iNu5I.png";
-    let raw = await fetch(`https://api.pro.coinbase.com/products/eth-usd/ticker`);
+  const coinbasePro = async (coin) => {
+    const img = "https://i.imgur.com/F8iNu5I.png";
+    let raw = await fetch(
+      `https://api.pro.coinbase.com/products/${coin}-usd/ticker`
+    );
     let json = await raw.json();
     let eth = await json.ask;
     return {
@@ -59,10 +40,10 @@ export default function App() {
     };
   };
 
-  const gemini = async () => {
+  const gemini = async (coin) => {
     const img =
       "https://cryptoradar.co/storage/brokers/October2017/gemini.optimized.png";
-    let raw = await fetch("https://api.gemini.com/v2/ticker/ethusd");
+    let raw = await fetch(`https://api.gemini.com/v2/ticker/${coin}usd`);
     let json = await raw.json();
     let ethBid = await json.bid;
     let ethAsk = await json.ask;
@@ -73,27 +54,40 @@ export default function App() {
     };
   };
 
-  const kraken = async () => {
+  const kraken = async(coin) => {
+    const coinUpper = coin.toUpperCase();
     const img =
       "https://cryptoradar.co/storage/brokers/teOdi9fCOU4kQCF6ceZUoVbJxjXYwTmzxWApkvOf.optimized.png";
     let raw = await fetch(
-      "https://cors-anywhere.herokuapp.com/https://api.kraken.com/0/public/Ticker?pair=ETHUSD"
+      `https://cors-anywhere.herokuapp.com/https://api.kraken.com/0/public/Ticker?pair=${coinUpper}USD`
     );
-    let json = await raw.json();
-    let ethAskRaw = await +json.result.XETHZUSD.a[0];
-    let ethAsk = await ethAskRaw.toFixed(2);
 
-    return {
-      exchange: "kraken",
-      price: ethAsk,
-      image: img,
-    };
+    if (coin === "eth") {
+      let json = await raw.json();
+      let ethAskRaw = await +json.result.XETHZUSD.a[0];
+      let ethAsk = await ethAskRaw.toFixed(2);
+      return {
+        exchange: "kraken",
+        price: ethAsk,
+        image: img,
+      };
+    } else {
+      let json = await raw.json();
+      let ethAskRaw = await +json.result.XXBTZUSD.a[0];
+      let ethAsk = await ethAskRaw.toFixed(2);
+      return {
+        exchange: "kraken",
+        price: ethAsk,
+        image: img,
+      };
+    }
   };
-
-  const bitstamp = async () => {
-    const img =
-      "https://i.imgur.com/SzVDBNQ.png";
-    let raw = await fetch("https://cors-anywhere.herokuapp.com/https://www.bitstamp.net/api/v2/ticker/ethusd/");
+  
+  const bitstamp = async (coin) => {
+    const img = "https://i.imgur.com/SzVDBNQ.png";
+    let raw = await fetch(
+      `https://cors-anywhere.herokuapp.com/https://www.bitstamp.net/api/v2/ticker/${coin}usd/`
+    );
     let json = await raw.json();
     let ethBid = await json.bid;
     let ethAsk = await json.ask;
@@ -104,8 +98,7 @@ export default function App() {
     };
   };
 
-
-  const fetchT = () => {
+  const fetchT = (coin) => {
     const sort = (array) => {
       const compareFunc = function (a, b) {
         return a.price - b.price;
@@ -113,24 +106,38 @@ export default function App() {
       return array.sort(compareFunc);
     };
 
-    const initialState = () =>
-      Promise.all([coinbase(), gemini(), kraken(), bitstamp(), coinbasePro()]).then((res) =>
+    const initialState = (coin) =>
+      Promise.all([
+        coinbase(coin),
+        gemini(coin),
+        kraken(coin),
+        bitstamp(coin),
+        coinbasePro(coin),
+      ]).then((res) => {
         setPrices(sort(res))
-      );
-    initialState();
-    setInterval(initialState, 30000);
+        setLoaded(!loaded)
+      })
+    initialState(coin);
+  //  setInterval(initialState, 30000);
   };
 
-  //  React.useEffect(() => {
-  //    fetchT()
-  //  }, [])
+   React.useEffect(() => {
+     btnState1 ? fetchT('eth') : fetchT('btc')
+   }, [btnState1])
+
+
+
+  const onChange = () => {
+    setBtnState1(!btnState1);
+    setBtnState2(!btnState2);
+  };
 
   return (
     // <div className="background">
     //     <Particles id="tsparticles" options={options} />
     <div className="main">
-      <Button />
-      <Table content={prices} />
+      <Button btnState1={btnState1} btnState2={btnState2} toggle={onChange} />
+      <Table content={prices} btnState1={btnState1} loaded={loaded} />
     </div>
     // </div>
   );
