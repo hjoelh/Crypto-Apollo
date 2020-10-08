@@ -12,6 +12,9 @@ export default function Table(props) {
             <p><span>$</span>{item.price}<span> / {props.loaded ? <FaBtc /> : <FaEthereum />}</span></p>
             <button type="button">Buy<FaMoneyCheckAlt /></button>
           </div>);})}
+
+          {props.content.length > 1 ? <div className="bestPrice"><p>Best price!</p></div> : ''}
+          
     </div>
   );
 };

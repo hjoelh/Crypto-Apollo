@@ -54,7 +54,7 @@ export default function App() {
     };
   };
 
-  const kraken = async(coin) => {
+  const kraken = async (coin) => {
     const coinUpper = coin.toUpperCase();
     const img =
       "https://cryptoradar.co/storage/brokers/teOdi9fCOU4kQCF6ceZUoVbJxjXYwTmzxWApkvOf.optimized.png";
@@ -82,7 +82,7 @@ export default function App() {
       };
     }
   };
-  
+
   const bitstamp = async (coin) => {
     const img = "https://i.imgur.com/SzVDBNQ.png";
     let raw = await fetch(
@@ -98,11 +98,55 @@ export default function App() {
     };
   };
 
+  const cex = async (coin) => {
+    const coinUpper = coin.toUpperCase();
+    const img = "https://i.imgur.com/m5KDLuV.png";
+    let raw = await fetch(
+      `https://cors-anywhere.herokuapp.com/https://cex.io/api/ticker/${coinUpper}/USD`
+    );
+    let json = await raw.json();
+  
+    let ethBid = await json.bid;
+    let ethAsk = await json.ask;
+    return {
+      exchange: "cex",
+      price: ethAsk,
+      image: img,
+    };
+  };
+
+  const bitfinex = async (coin) => {
+    const coinUpper = coin.toUpperCase();
+    const img = "https://i.imgur.com/mGx8IKV.png";
+    let raw = await fetch(
+      `https://cors-anywhere.herokuapp.com/https://api-pub.bitfinex.com/v2/ticker/t${coinUpper}USD`
+    );
+    let json = await raw.json();
+     let ethAsk = await json[2];
+    return {
+      exchange: "bitfinex",
+      price: ethAsk,
+      image: img,
+    };
+  };
+
+
+
+  
+
+
   const fetchT = (coin) => {
     const sort = (array) => {
       const compareFunc = function (a, b) {
         return a.price - b.price;
       };
+
+      if (array[0].price.length > 7) {
+        array
+          .sort(compareFunc)
+          .map((e) => e.price = parseInt(e.price).toLocaleString());
+      }
+
       return array.sort(compareFunc);
     };
 
@@ -113,19 +157,19 @@ export default function App() {
         kraken(coin),
         bitstamp(coin),
         coinbasePro(coin),
+        cex(coin),
+        bitfinex(coin)
       ]).then((res) => {
-        setPrices(sort(res))
-        setLoaded(!loaded)
-      })
+        setPrices(sort(res));
+        setLoaded(!loaded);
+      });
     initialState(coin);
-  //  setInterval(initialState, 30000);
+    //  setInterval(initialState, 30000);
   };
 
-   React.useEffect(() => {
-     btnState1 ? fetchT('eth') : fetchT('btc')
-   }, [btnState1])
-
-
+  React.useEffect(() => {
+    btnState1 ? fetchT("eth") : fetchT("btc");
+  }, [btnState1]);
 
   const onChange = () => {
     setBtnState1(!btnState1);

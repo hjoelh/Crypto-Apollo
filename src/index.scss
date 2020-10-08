@@ -42,6 +42,8 @@
 
 .tableContainer {
   background: linear-gradient(90deg, #fc466b 0%, #3f5efb 100%);
+  margin-top: 50px;
+  position: relative;
 }
 
 .tableHeader {
@@ -104,7 +106,7 @@
 
 .radioDiv input:checked ~ .button1 {
   .icon {
-    transition-duration: 3s;
+    transition-duration: 1s;
     transition-property: transform;
     transform: rotateY(360deg);
   }
@@ -124,6 +126,9 @@
   border: 1px solid black;
   transition: 0.75s;
   background-color: transparent;
+    &:hover {
+      background-color: rgb(237, 237, 237);
+    }
 }
 
 
@@ -146,4 +151,20 @@
   right: 50%;
   background: linear-gradient(90deg, #fc466b 0%, #ffffff 100%);
   transform: translateX(180deg);
+}
+
+.bestPrice {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0px;
+  right: 0px;
+  background-color: #fc466b;
+  width: 100px;
+  height: 40px;
+  color: white;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: 2s;
 }

@@ -56,6 +56,8 @@
 .tableContainer {
   background: -webkit-gradient(linear, left top, right top, from(#fc466b), to(#3f5efb));
   background: linear-gradient(90deg, #fc466b 0%, #3f5efb 100%);
+  margin-top: 50px;
+  position: relative;
 }
 
 .tableHeader {
@@ -143,8 +145,8 @@
 }
 
 .radioDiv input:checked ~ .button1 .icon {
-  -webkit-transition-duration: 3s;
-          transition-duration: 3s;
+  -webkit-transition-duration: 1s;
+          transition-duration: 1s;
   -webkit-transition-property: -webkit-transform;
   transition-property: -webkit-transform;
   transition-property: transform;
@@ -174,6 +176,10 @@
   background-color: transparent;
 }
 
+.button1:hover {
+  background-color: #ededed;
+}
+
 .radioDiv {
   width: 100%;
 }
@@ -197,5 +203,28 @@
   background: linear-gradient(90deg, #fc466b 0%, #ffffff 100%);
   -webkit-transform: translateX(180deg);
           transform: translateX(180deg);
+}
+
+.bestPrice {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  top: 0px;
+  right: 0px;
+  background-color: #fc466b;
+  width: 100px;
+  height: 40px;
+  color: white;
+  font-weight: bold;
+  font-size: 0.9rem;
+  -webkit-transition: 2s;
+  transition: 2s;
 }
 /*# sourceMappingURL=index.css.map */
