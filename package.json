@@ -1,6 +1,6 @@
 {
   "homepage": "https://hjoelh.github.io/crypto-compare",
-  "name": "cryptocompare",
+  "name": "crypto-compare",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
