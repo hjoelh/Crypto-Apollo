@@ -130,11 +130,6 @@ export default function App() {
     };
   };
 
-
-
-  
-
-
   const fetchT = (coin) => {
     const sort = (array) => {
       const compareFunc = function (a, b) {
