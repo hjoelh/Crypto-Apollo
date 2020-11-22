@@ -4,7 +4,6 @@ import Table from "./components/table";
 import { gql, useQuery } from "@apollo/client";
 
 export default function App() {
-  const [prices, setPrices] = React.useState([]);
   const [coinType, setCoinType] = React.useState("btc");
 
   const GET_PRICES = gql`
