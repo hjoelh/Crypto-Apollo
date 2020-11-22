@@ -1,4 +1,0 @@
-websocket
-progress bar top of table
-lock numbers to .00 decimanl point
-
