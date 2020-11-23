@@ -18,6 +18,12 @@
   position: relative;
 }
 
+@media (max-width: 800px) {
+  .buttonContainer {
+    margin-top: 50px;
+  }
+}
+
 .BuySellBtn {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -47,7 +53,6 @@
 }
 
 .main {
-  height: 100vh;
   max-width: 1200px;
   width: 85%;
   margin: auto;
@@ -90,13 +95,19 @@
 }
 
 .tableContent img {
-  width: 150px;
-  height: 60px;
+  max-width: 150px;
+  max-height: 60px;
 }
 
 .tableContent p {
   font-size: 1.75rem;
   font-weight: bold;
+}
+
+@media (max-width: 800px) {
+  .tableContent p {
+    font-size: 1.5rem;
+  }
 }
 
 .tableContent span {
@@ -133,6 +144,12 @@
   color: black;
   -webkit-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 800px) {
+  .tableContent button {
+    display: none;
+  }
 }
 
 /* Hide the browser's default checkbox */
@@ -219,12 +236,22 @@
   top: 0px;
   right: 0px;
   background-color: #fc466b;
-  width: 100px;
-  height: 40px;
+  width: 7em;
+  height: 2.5em;
   color: white;
   font-weight: bold;
   font-size: 0.9rem;
-  -webkit-transition: 2s;
-  transition: 2s;
+}
+
+@media (max-width: 800px) {
+  .bestPrice {
+    top: -15px;
+    font-size: 0.7rem;
+  }
+}
+
+.loading {
+  position: absolute;
+  top: -25px;
 }
 /*# sourceMappingURL=index.css.map */

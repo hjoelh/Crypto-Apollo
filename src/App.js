@@ -18,7 +18,8 @@ export default function App() {
 
   const { loading, error, data, client } = useQuery(GET_PRICES, {
     variables: { coin: coinType },
-    pollInterval: 10000,
+    pollInterval: 30000,
+    notifyOnNetworkStatusChange: true,
     onCompleted: () => {
       const raw = data.data.map((e) => ({
         ...e,
@@ -44,7 +45,12 @@ export default function App() {
           if (coinType === "btc") setCoinType("eth");
         }}
       />
-      <Table content={data?.data} loading={loading} error={error} coin={coinType} />
+      <Table
+        content={data?.data}
+        loading={loading}
+        error={error}
+        coin={coinType}
+      />
     </div>
   );
 }
