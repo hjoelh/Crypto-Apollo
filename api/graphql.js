@@ -1,14 +1,12 @@
-const { ApolloServer, gql } = require("apollo-server");
+const { ApolloServer, gql } = require("apollo-server-lambda");
 const fetch = require("node-fetch");
 
 const typeDefs = gql`
-
   type Exchange {
     exchangeName: String
     price: String
     image: String
   }
-
   type Query {
     data(coin: String!): [Exchange]
   }
@@ -123,6 +121,4 @@ const server = new ApolloServer({
   playground: true,
 });
 
-server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`);
-});
+exports.handler = server.createHandler();

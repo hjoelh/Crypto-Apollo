@@ -5,7 +5,7 @@ import App from "./App";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 
 const client = new ApolloClient({
-  uri: "https://apollo-crypto.herokuapp.com",
+  uri: process.env.API_URL,
   cache: new InMemoryCache(),
 });
 
