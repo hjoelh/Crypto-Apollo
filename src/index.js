@@ -5,7 +5,7 @@ import App from "./App";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 
 const client = new ApolloClient({
-  uri: process.env.REACT_APP_API_URL,
+  uri: "https://crypto-compare-nu.vercel.app/api/graphql",
   cache: new InMemoryCache(),
 });
 
