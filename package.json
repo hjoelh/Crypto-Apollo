@@ -12,6 +12,11 @@
     "react-scripts": "3.4.3",
     "uuid": "^8.3.1"
   },
+  "build": {
+    "env": {
+      "NODEJS_AWS_HANDLER_NAME": "handler"
+    }
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
