@@ -6,6 +6,6 @@
 <br>
 
 **Frontend**
- - **Apollo Client** - fetches from ^ the server  
+ - **Apollo Client** 
  - **React**
 
