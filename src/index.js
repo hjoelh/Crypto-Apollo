@@ -6,7 +6,7 @@ import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 
 const uri =
   process.env.NODE_ENV === "production"
-    ? "/api/graphql"
+    ? "https://crypto-compare-nu.vercel.app/api/graphql"
     : "http://localhost:4000/";
 
 const client = new ApolloClient({
