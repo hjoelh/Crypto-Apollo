@@ -122,10 +122,10 @@ const server = new ApolloServer({
   playground: true,
 });
 
-if (isProduction) {
-  exports.handler = server.createHandler();
-}
 
-server.listen().then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`);
-});
+  exports.handler = server.createHandler();
+
+
+// server.listen().then(({ url }) => {
+//   console.log(`🚀  Server ready at ${url}`);
+// });
