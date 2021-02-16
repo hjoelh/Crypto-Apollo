@@ -1,8 +1,5 @@
-const isProduction =
-  process.env.VERCEL_ENV || process.env.NODE_ENV === "production";
-const { ApolloServer, gql } = require(`apollo-server${
-  isProduction ? "-lambda" : ""
-}`);
+
+const { ApolloServer, gql } = require("apollo-server-lambda")
 const fetch = require("node-fetch");
 
 const typeDefs = gql`
