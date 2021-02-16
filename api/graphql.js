@@ -127,8 +127,8 @@ const server = new ApolloServer({
 
 if (isProduction) {
   exports.handler = server.createHandler();
+} else {
+  server.listen().then(({ url }) => {
+    console.log(`🚀  Server ready at ${url}`);
+  });
 }
-
-server.listen().then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`);
-});
