@@ -1,4 +1,7 @@
-const { ApolloServer, gql } = require("apollo-server-lambda");
+const isProduction = process.env.NODE_ENV === "production";
+const { ApolloServer, gql } = require(`apollo-server${
+  isProduction ? "-lambda" : ""
+}`);
 const fetch = require("node-fetch");
 
 const typeDefs = gql`
@@ -121,4 +124,10 @@ const server = new ApolloServer({
   playground: true,
 });
 
-exports.handler = server.createHandler();
+if (isProduction) {
+  exports.handler = server.createHandler();
+}
+
+server.listen().then(({ url }) => {
+  console.log(`🚀  Server ready at ${url}`);
+});

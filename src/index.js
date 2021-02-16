@@ -4,8 +4,13 @@ import "./index.css";
 import App from "./App";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 
+const uri =
+  process.env.NODE_ENV === "production"
+    ? "/api/graphql"
+    : "http://localhost:4000/";
+
 const client = new ApolloClient({
-  uri: "https://crypto-compare-nu.vercel.app/api/graphql",
+  uri,
   cache: new InMemoryCache(),
 });
 

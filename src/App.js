@@ -21,11 +21,8 @@ export default function App() {
     pollInterval: 30000,
     notifyOnNetworkStatusChange: true,
     onCompleted: () => {
-      const raw = data.data.map((e) => ({
-        ...e,
-      }));
-
-      const sorted = raw.sort((a, b) => a.price - b.price);
+      const { data: raw } = data;
+      const sorted = [...raw].sort((a, b) => a.price - b.price);
 
       client.writeQuery({
         query: GET_PRICES,

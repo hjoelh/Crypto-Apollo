@@ -1,7 +1,7 @@
 import React from "react";
 import { FaEthereum, FaBtc } from "react-icons/fa";
 
-export default function Button(props) {
+export default function Button({ toggle }) {
   return (
     <div className="buttonContainer">
       <label className="radioDiv">
@@ -10,7 +10,7 @@ export default function Button(props) {
           className="button1"
           type="radio"
           name="select"
-          onChange={props.toggle}
+          onChange={toggle}
         ></input>
         <div className="slider"></div>
         <span className="button1">
@@ -24,7 +24,7 @@ export default function Button(props) {
           className="button1"
           type="radio"
           name="select"
-          onChange={props.toggle}
+          onChange={toggle}
         ></input>
         <span className="button1">
           <FaBtc className="icon" />
