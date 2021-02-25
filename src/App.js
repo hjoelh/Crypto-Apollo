@@ -4,7 +4,7 @@ import Table from "./components/table";
 import { gql, useQuery } from "@apollo/client";
 
 export default function App() {
-  const [coinType, setCoinType] = React.useState("btc");
+  const [coin, setCoin] = React.useState("btc");
 
   const GET_PRICES = gql`
     query GetPrices($coin: String!) {
@@ -17,7 +17,7 @@ export default function App() {
   `;
 
   const { loading, error, data, client } = useQuery(GET_PRICES, {
-    variables: { coin: coinType },
+    variables: { coin },
     pollInterval: 30000,
     notifyOnNetworkStatusChange: true,
     onCompleted: () => {
@@ -26,7 +26,7 @@ export default function App() {
 
       client.writeQuery({
         query: GET_PRICES,
-        variables: { coin: coinType },
+        variables: { coin },
         data: {
           data: sorted,
         },
@@ -38,16 +38,11 @@ export default function App() {
     <div className="main">
       <Button
         toggle={() => {
-          if (coinType === "eth") setCoinType("btc");
-          if (coinType === "btc") setCoinType("eth");
+          if (coin === "eth") setCoin("btc");
+          if (coin === "btc") setCoin("eth");
         }}
       />
-      <Table
-        content={data?.data}
-        loading={loading}
-        error={error}
-        coin={coinType}
-      />
+      <Table content={data?.data} loading={loading} error={error} coin={coin} />
     </div>
   );
 }
